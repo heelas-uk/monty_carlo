@@ -19,8 +19,6 @@ def takewager():
         quit(-10) 
     elif wager <= 0:
         room="staring"
-        
-    
 while game_running == True and bal >= 0:
     if room == "starting":
         choicea = int(input("You are faced with a choice games of skill (1), or of luck (2)  "))
@@ -30,8 +28,9 @@ while game_running == True and bal >= 0:
             room = "chance"
         else:
             print("Silly")
-            room = "staring"
-            break
+            room = "staringrd"
+    elif room == "staringrd":
+        room = "starting"
     elif room == "skill":
         choiceb = input("You can chose between a higher or lower game (1), a time estimation game (2), trivea (3), or go back (4)  ")
         if choiceb == "1":
@@ -51,12 +50,12 @@ while game_running == True and bal >= 0:
         else:
             room = "starting"
     elif room == "hl":
-        print("You have 5 guesses to guess my number between 1-100. Pays 1:1")
+        print("You have 4 guesses to guess my number between 1-100. Pays 1:1")
         takewager()
         guessed = False
         guess = 0
         num = rand.randint(1, 100)
-        while guess <=4 and guessed==False:
+        while guess <=3 and guessed==False:
            
             uguess = int(input("You're guess please "))
             if uguess > num:
@@ -103,7 +102,7 @@ while game_running == True and bal >= 0:
         takewager()
         if quiz == True:
             print("You have already played too many times, your wager has been returned minus a small fee")
-            total = total-1
+            bal = bal-1
         t0= time.perf_counter()
         a1 = questionary.select("The chemical element Lithium is named after the country of Lithuania.", choices=["True", "False"]).ask()
         a2 = questionary.select("It was once believed that injecting shark cartilage into people would prevent them from contracting cancer.", choices=["True", "False"]).ask()
@@ -156,6 +155,7 @@ while game_running == True and bal >= 0:
                 bal = bal - wager 
                 room = "starting"
         else:
+            takewager()
             unum = int(input("Enter a number between 0 and 36 "))
             num2 = rand.randint(0,36)
             if unum == num2:
